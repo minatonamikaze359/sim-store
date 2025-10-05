@@ -3,13 +3,60 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Hacker’s Hideout — Your Ultimate Tech Resource Hub</title>
+<title>Hacker’s Hideout — Login</title>
 <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 <style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:"Poppins",sans-serif;}
+body{
+  height:100vh;
+  background:radial-gradient(circle at 20% 30%, #06161b, #010101 70%);
+  display:flex;justify-content:center;align-items:center;
+  overflow:hidden;color:#e9f1ff;
+}
+
+/* LOGIN CARD STYLES */
+.wrapper{
+  width:360px;height:440px;
+  perspective:1000px;position:relative;
+}
+.card{
+  width:100%;height:100%;
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(0,255,231,0.15);
+  border-radius:15px;
+  box-shadow:0 0 40px rgba(0,255,231,0.2);
+  position:absolute;
+  backface-visibility:hidden;
+  transition:transform 1s;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+}
+.card h2{color:#00ffe7;margin-bottom:20px;}
+.inputBox{width:80%;margin:10px 0;}
+.inputBox input{
+  width:100%;padding:10px 15px;
+  border:none;outline:none;
+  background:rgba(255,255,255,0.08);
+  color:#fff;border-radius:8px;
+}
+.btn{
+  margin-top:20px;padding:10px 25px;
+  background:#00ffe7;color:#000;
+  border:none;border-radius:8px;
+  font-weight:600;cursor:pointer;
+  transition:0.3s;
+}
+.btn:hover{background:#00c3a3;box-shadow:0 0 20px #00ffe7;}
+.toggle{
+  margin-top:15px;color:#b8c6d1;cursor:pointer;
+  font-size:0.9em;text-decoration:underline;
+}
+#signup-card{transform:rotateY(180deg);}
+.wrapper.flip #login-card{transform:rotateY(180deg);}
+.wrapper.flip #signup-card{transform:rotateY(0deg);}
+
+/* MAIN SITE STYLES */
+#mainSite{display:none;}
 * { margin:0; padding:0; box-sizing:border-box; font-family:"Poppins",sans-serif; }
-body { background:radial-gradient(circle at 20% 30%, #06161b, #010101 70%); color:#e9f1ff; overflow-x:hidden; position:relative; }
-body::before,body::after { content:''; position:fixed; width:200vw; height:200vh; top:-50%; left:-50%; background:repeating-radial-gradient(circle, rgba(0,255,200,0.08) 0, rgba(0,255,200,0.08) 1px, transparent 1px, transparent 100px); animation:rotateBg 60s linear infinite; z-index:0; }
-@keyframes rotateBg { from{transform:rotate(0deg);} to{transform:rotate(360deg);} }
 header { text-align:center; padding:90px 20px 60px; position:relative; z-index:1; }
 header h1 { font-size:3em; background:linear-gradient(90deg,#00ffe7,#b400ff,#00ffe7); background-size:200% auto; -webkit-background-clip:text; -webkit-text-fill-color:transparent; animation:textFlow 4s linear infinite; font-weight:700; text-shadow:0 0 20px rgba(0,255,231,0.4); }
 @keyframes textFlow { to{background-position:200% center;} }
@@ -37,6 +84,27 @@ footer { background:#020202; text-align:center; padding:35px 15px; color:#b8c6d1
 </style>
 </head>
 <body>
+
+<!-- LOGIN/SIGNUP -->
+<div class="wrapper" id="wrapper">
+  <div class="card" id="login-card">
+    <h2>Login</h2>
+    <div class="inputBox"><input type="email" id="loginEmail" placeholder="Email" required></div>
+    <div class="inputBox"><input type="password" id="loginPassword" placeholder="Password" required></div>
+    <button class="btn" onclick="login()">Login</button>
+    <div class="toggle" onclick="flipCard()">Don’t have an account? Sign Up</div>
+  </div>
+  <div class="card" id="signup-card">
+    <h2>Sign Up</h2>
+    <div class="inputBox"><input type="email" id="signupEmail" placeholder="Email" required></div>
+    <div class="inputBox"><input type="password" id="signupPassword" placeholder="Password" required></div>
+    <button class="btn" onclick="signup()">Sign Up</button>
+    <div class="toggle" onclick="flipCard()">Already have an account? Login</div>
+  </div>
+</div>
+
+<!-- MAIN SITE -->
+<div id="mainSite">
 <header>
   <h1>Hacker’s Hideout</h1>
   <p>Get virtual tools, automation bots, premium services, and tutorials — all in one trusted platform.</p>
@@ -46,27 +114,27 @@ footer { background:#020202; text-align:center; padding:35px 15px; color:#b8c6d1
 
 <section class="section">
   <h2>Virtual Numbers</h2>
-  <div class="item"><span> +1 555-0100</span><button onclick="window.location.href='https://wa.me/8801405706180'">Buy</button></div>
-  <div class="item"><span> +880 1714-562480</span><button onclick="window.location.href='https://wa.me/8801405706180'">Buy</button></div>
-  <div class="item"><span> +234 905 123 4567</span><button onclick="window.location.href='https://wa.me/8801405706180'">Buy</button></div>
+  <div class="item"><span>+1 555-0100</span><button onclick="window.location.href='https://wa.me/8801405706180'">Buy</button></div>
+  <div class="item"><span>+880 1714-562480</span><button onclick="window.location.href='https://wa.me/8801405706180'">Buy</button></div>
+  <div class="item"><span>+234 905 123 4567</span><button onclick="window.location.href='https://wa.me/8801405706180'">Buy</button></div>
 </section>
 
 <section class="section">
   <h2>Premium Apps</h2>
-  <div class="item"><span> ChatMaster Pro</span><button onclick="window.location.href='https://wa.me/8801405706180'">Buy</button></div>
-  <div class="item"><span> SecureVault</span><button onclick="window.location.href='https://wa.me/8801405706180'">Buy</button></div>
-  <div class="item"><span> StreamPlus</span><button onclick="window.location.href='https://wa.me/8801405706180'">Buy</button></div>
+  <div class="item"><span>ChatMaster Pro</span><button onclick="window.location.href='https://wa.me/8801405706180'">Buy</button></div>
+  <div class="item"><span>SecureVault</span><button onclick="window.location.href='https://wa.me/8801405706180'">Buy</button></div>
+  <div class="item"><span>StreamPlus</span><button onclick="window.location.href='https://wa.me/8801405706180'">Buy</button></div>
 </section>
 
 <section class="section">
   <h2>Toolkits</h2>
-  <div class="item"><span> Hacker’s Hideout</span><button onclick="window.location.href='https://wa.me/8801405706180'">Buy</button></div>
-  <div class="item"><span> ScriptVault</span><button onclick="window.location.href='https://wa.me/8801405706180'">Buy</button></div>
-  <div class="item"><span> BotForge</span><button onclick="window.location.href='https://wa.me/8801405706180'">Buy</button></div>
+  <div class="item"><span>Hacker’s Hideout</span><button onclick="window.location.href='https://wa.me/8801405706180'">Buy</button></div>
+  <div class="item"><span>ScriptVault</span><button onclick="window.location.href='https://wa.me/8801405706180'">Buy</button></div>
+  <div class="item"><span>BotForge</span><button onclick="window.location.href='https://wa.me/8801405706180'">Buy</button></div>
 </section>
 
 <section class="subscribe">
-  <h2> Stay Updated</h2>
+  <h2>Stay Updated</h2>
   <p>Subscribe to get early access and updates from Hacker’s Hideout.</p>
   <form onsubmit="window.location.href='https://wa.me/8801405706180'; return false;">
     <input type="email" placeholder="Enter your email" required />
@@ -84,15 +152,15 @@ footer { background:#020202; text-align:center; padding:35px 15px; color:#b8c6d1
   <p>© <span id="year"></span> Hacker’s Hideout — All rights reserved.</p>
   <p>Contact: info@hackershideout.tech</p>
 </footer>
+</div>
 
 <script>
 document.getElementById("year").textContent = new Date().getFullYear();
 
 // Countdown Timer
 let countdownDate = new Date();
-countdownDate.setDate(countdownDate.getDate() + 7); // 7 days from now
+countdownDate.setDate(countdownDate.getDate() + 7);
 countdownDate = countdownDate.getTime();
-
 let countdownFunction = setInterval(function(){
   let now = new Date().getTime();
   let distance = countdownDate - now;
@@ -106,6 +174,40 @@ let countdownFunction = setInterval(function(){
     document.getElementById("countdown").innerHTML = "Launched!";
   }
 }, 1000);
+
+// Flip card
+function flipCard(){
+  document.getElementById("wrapper").classList.toggle("flip");
+}
+
+// Signup function
+function signup(){
+  const email=document.getElementById("signupEmail").value;
+  const password=document.getElementById("signupPassword").value;
+  if(email && password){
+    localStorage.setItem("userEmail",email);
+    localStorage.setItem("userPassword",password);
+    alert("Signup successful! Please login now.");
+    flipCard();
+  }else{
+    alert("Please fill all fields.");
+  }
+}
+
+// Login function
+function login(){
+  const email=document.getElementById("loginEmail").value;
+  const password=document.getElementById("loginPassword").value;
+  const storedEmail=localStorage.getItem("userEmail");
+  const storedPassword=localStorage.getItem("userPassword");
+  if(email===storedEmail && password===storedPassword){
+    alert("Login successful!");
+    document.getElementById("wrapper").style.display="none";
+    document.getElementById("mainSite").style.display="block";
+  }else{
+    alert("Incorrect email or password!");
+  }
+}
 </script>
 </body>
-  </html>
+                       </html>
