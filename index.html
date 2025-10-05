@@ -1,107 +1,111 @@
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Hacker's Hideout — SIM Store</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Hacker’s Hideout — Your Ultimate Tech Resource Hub</title>
+<link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; font-family:"Poppins",sans-serif; }
+body { background:radial-gradient(circle at 20% 30%, #06161b, #010101 70%); color:#e9f1ff; overflow-x:hidden; position:relative; }
+body::before,body::after { content:''; position:fixed; width:200vw; height:200vh; top:-50%; left:-50%; background:repeating-radial-gradient(circle, rgba(0,255,200,0.08) 0, rgba(0,255,200,0.08) 1px, transparent 1px, transparent 100px); animation:rotateBg 60s linear infinite; z-index:0; }
+@keyframes rotateBg { from{transform:rotate(0deg);} to{transform:rotate(360deg);} }
+header { text-align:center; padding:90px 20px 60px; position:relative; z-index:1; }
+header h1 { font-size:3em; background:linear-gradient(90deg,#00ffe7,#b400ff,#00ffe7); background-size:200% auto; -webkit-background-clip:text; -webkit-text-fill-color:transparent; animation:textFlow 4s linear infinite; font-weight:700; text-shadow:0 0 20px rgba(0,255,231,0.4); }
+@keyframes textFlow { to{background-position:200% center;} }
+header p { font-size:1.1em; margin-top:12px; color:#b8c6d1; max-width:650px; margin-left:auto; margin-right:auto; line-height:1.6; }
+.btn { display:inline-block; margin-top:35px; padding:14px 36px; font-size:1rem; background:transparent; border:2px solid #00ffe7; color:#00ffe7; border-radius:8px; text-transform:uppercase; letter-spacing:1px; position:relative; overflow:hidden; transition:all 0.3s ease; cursor:pointer; z-index:2; }
+.btn:hover { color:#000; background:#00ffe7; box-shadow:0 0 20px #00ffe7,0 0 40px #00ffe7; }
+.section { background:rgba(255,255,255,0.03); border:1px solid rgba(0,255,231,0.15); padding:30px; border-radius:15px; margin:25px auto; max-width:1000px; }
+.section h2 { color:#00ffe7; border-left:4px solid #00ffe7; padding-left:10px; margin-bottom:15px; }
+.item { display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; padding:10px 0; border-bottom:1px solid #2a2a2a; }
+.item:last-child { border-bottom:none; }
+.item span { font-size:1em; color:#eee; }
+.item button { background-color:transparent; border:1px solid #33ff99; color:#33ff99; padding:6px 18px; border-radius:20px; cursor:pointer; font-size:0.9em; transition:all 0.3s ease; }
+.item button:hover { background-color:#33ff99; color:#000; transform:scale(1.05); }
+.subscribe { text-align:center; padding:80px 20px; background:linear-gradient(180deg,#020303,#071214); border-top:1px solid rgba(0,255,231,0.08); }
+.subscribe h2 { font-size:1.8em; color:#00ffe7; margin-bottom:10px; }
+.subscribe p { color:#b8c6d1; margin-bottom:25px; }
+.subscribe input { padding:12px 15px; width:260px; border-radius:6px; border:none; outline:none; background:rgba(255,255,255,0.05); color:#fff; font-size:1em; }
+.subscribe button { margin-left:10px; padding:12px 24px; background:#00ffe7; color:#000; border:none; border-radius:6px; font-weight:600; cursor:pointer; }
+.subscribe button:hover { background:#00c3a3; box-shadow:0 0 20px #00ffe7; }
+footer { background:#020202; text-align:center; padding:35px 15px; color:#b8c6d1; font-size:0.9em; border-top:1px solid rgba(0,255,231,0.08); }
+.socials a { color:#00ffe7; margin:0 10px; font-size:1.4em; transition:0.3s; }
+.socials a:hover { color:#b400ff; text-shadow:0 0 15px #b400ff; }
+.countdown { margin-top:20px; font-size:1.2em; color:#33ff99; font-weight:bold; }
+@media (max-width:600px) { header h1{font-size:2.2em;} .subscribe input{width:200px;margin-bottom:10px;} .subscribe button{margin-left:0;width:200px;} .item{flex-direction:column;align-items:flex-start;} .item button{margin-top:10px;width:100%;} }
+</style>
 </head>
 <body>
-  <div class="container">
-    <div class="header">
-      <div class="logo">
-        <div class="mark">HH</div>
-        <div>
-          <h1>Hacker's Hideout — SIM Store</h1>
-          <div style="color:#9ff;font-size:13px">Dark neon demo • PayPal / Stripe placeholders • Replace keys for production</div>
-        </div>
-      </div>
-      <div style="display:flex;gap:8px;align-items:center">
-        <button class="btn" id="view-orders-btn">My Orders</button>
-      </div>
-    </div>
+<header>
+  <h1>Hacker’s Hideout</h1>
+  <p>Get virtual tools, automation bots, premium services, and tutorials — all in one trusted platform.</p>
+  <div class="btn" onclick="window.location.href='https://wa.me/8801405706180'">Coming Soon</div>
+  <div class="countdown" id="countdown"></div>
+</header>
 
-    <aside class="panel">
-      <h2>Select Country</h2>
-      <div id="countryList" class="country-list"></div>
+<section class="section">
+  <h2>Virtual Numbers</h2>
+  <div class="item"><span> +1 555-0100</span><button onclick="window.location.href='https://wa.me/8801405706180'">Buy</button></div>
+  <div class="item"><span> +880 1714-562480</span><button onclick="window.location.href='https://wa.me/8801405706180'">Buy</button></div>
+  <div class="item"><span> +234 905 123 4567</span><button onclick="window.location.href='https://wa.me/8801405706180'">Buy</button></div>
+</section>
 
-      <label>SIM Package</label>
-      <select id="packageSelect"></select>
+<section class="section">
+  <h2>Premium Apps</h2>
+  <div class="item"><span> ChatMaster Pro</span><button onclick="window.location.href='https://wa.me/8801405706180'">Buy</button></div>
+  <div class="item"><span> SecureVault</span><button onclick="window.location.href='https://wa.me/8801405706180'">Buy</button></div>
+  <div class="item"><span> StreamPlus</span><button onclick="window.location.href='https://wa.me/8801405706180'">Buy</button></div>
+</section>
 
-      <label>Quantity</label>
-      <input type="number" id="qty" value="1" min="1">
+<section class="section">
+  <h2>Toolkits</h2>
+  <div class="item"><span> Hacker’s Hideout</span><button onclick="window.location.href='https://wa.me/8801405706180'">Buy</button></div>
+  <div class="item"><span> ScriptVault</span><button onclick="window.location.href='https://wa.me/8801405706180'">Buy</button></div>
+  <div class="item"><span> BotForge</span><button onclick="window.location.href='https://wa.me/8801405706180'">Buy</button></div>
+</section>
 
-      <div style="display:flex;gap:8px;margin-top:12px">
-        <button class="btn" id="showSimsBtn">Show Available SIMs</button>
-        <button class="btn small" id="refreshBtn">Refresh</button>
-      </div>
+<section class="subscribe">
+  <h2> Stay Updated</h2>
+  <p>Subscribe to get early access and updates from Hacker’s Hideout.</p>
+  <form onsubmit="window.location.href='https://wa.me/8801405706180'; return false;">
+    <input type="email" placeholder="Enter your email" required />
+    <button type="submit">Subscribe</button>
+  </form>
+</section>
 
-      <div id="simList" class="sim-grid"></div>
-      <p class="note">Images are auto-generated placeholders. Replace with official flag/SIM art for production.</p>
-    </aside>
-
-    <main class="panel order-area">
-      <div>
-        <h2>Order Summary</h2>
-        <div style="display:flex;gap:12px;flex-wrap:wrap">
-          <div><strong>Country:</strong> <span id="summaryCountry">USA</span></div>
-          <div><strong>Package:</strong> <span id="summaryPackage">Starter</span></div>
-          <div><strong>Qty:</strong> <span id="summaryQty">1</span></div>
-          <div><strong>Total:</strong> <span id="summaryTotal">$0</span></div>
-        </div>
-        <div style="margin-top:10px">
-          <label>Buyer name</label>
-          <input id="buyerName" type="text" placeholder="Full name">
-          <label style="margin-top:8px">Phone / PalmPay</label>
-          <input id="buyerPhone" type="tel" placeholder="+1...">
-        </div>
-      </div>
-
-      <div>
-        <h2>Payment</h2>
-        <div class="payments">
-          <div class="pay-option active" data-pay="paypal">PayPal</div>
-          <div class="pay-option" data-pay="card">Credit/Debit (Stripe)</div>
-          <div class="pay-option" data-pay="palmpay">PalmPay</div>
-        </div>
-
-        <div id="paymentArea" style="margin-top:12px">
-          <div id="paypalContainer"></div>
-
-          <div id="cardForm" class="hidden">
-            <label>Cardholder</label>
-            <input id="cardName" type="text" placeholder="Name on card">
-            <input id="cardNumber" type="text" placeholder="4242 4242 4242 4242">
-            <div style="display:flex;gap:8px">
-              <input id="cardExp" type="text" placeholder="MM/YY">
-              <input id="cardCvc" type="text" placeholder="CVC">
-            </div>
-            <div style="margin-top:12px">
-              <button class="btn" id="cardPayBtn">Pay (Simulate)</button>
-            </div>
-          </div>
-
-          <div id="palmForm" class="hidden">
-            <label>PalmPay mobile</label>
-            <input id="palmNumber" type="tel" placeholder="+234...">
-            <div style="margin-top:12px"><button class="btn" id="palmPayBtn">Pay with PalmPay (Simulate)</button></div>
-          </div>
-        </div>
-      </div>
-
-      <div id="resultArea" class="panel">
-        <h3>SIM Access / Delivery</h3>
-        <div class="note">Complete payment to receive assigned SIM number. This demo simulates instant delivery.</div>
-      </div>
-    </main>
-
-    <div class="footer">
-      © Hacker's Hideout — Demo store · Replace payment integrations with server-side implementations for production
-    </div>
+<footer>
+  <div class="socials">
+    <a href="#"><i class='bx bxl-twitter'></i></a>
+    <a href="#"><i class='bx bxl-facebook'></i></a>
+    <a href="#"><i class='bx bxl-instagram'></i></a>
+    <a href="#"><i class='bx bxl-github'></i></a>
   </div>
+  <p>© <span id="year"></span> Hacker’s Hideout — All rights reserved.</p>
+  <p>Contact: info@hackershideout.tech</p>
+</footer>
 
-  <script src="js/app.js"></script>
+<script>
+document.getElementById("year").textContent = new Date().getFullYear();
+
+// Countdown Timer
+let countdownDate = new Date();
+countdownDate.setDate(countdownDate.getDate() + 7); // 7 days from now
+countdownDate = countdownDate.getTime();
+
+let countdownFunction = setInterval(function(){
+  let now = new Date().getTime();
+  let distance = countdownDate - now;
+  let days = Math.floor(distance / (1000*60*60*24));
+  let hours = Math.floor((distance % (1000*60*60*24))/(1000*60*60));
+  let minutes = Math.floor((distance % (1000*60*60))/(1000*60));
+  let seconds = Math.floor((distance % (1000*60))/1000);
+  document.getElementById("countdown").innerHTML = days+"d "+hours+"h "+minutes+"m "+seconds+"s";
+  if(distance < 0){
+    clearInterval(countdownFunction);
+    document.getElementById("countdown").innerHTML = "Launched!";
+  }
+}, 1000);
+</script>
 </body>
-</html>
+  </html>
