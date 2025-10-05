@@ -1,15 +1,213 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Hacker’s Hideout</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Hacker’s Hideout — Login</title>
+<link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:"Poppins",sans-serif;}
+body{
+  height:100vh;
+  background:radial-gradient(circle at 20% 30%, #06161b, #010101 70%);
+  display:flex;justify-content:center;align-items:center;
+  overflow:hidden;color:#e9f1ff;
+}
+
+/* LOGIN CARD STYLES */
+.wrapper{
+  width:360px;height:440px;
+  perspective:1000px;position:relative;
+}
+.card{
+  width:100%;height:100%;
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(0,255,231,0.15);
+  border-radius:15px;
+  box-shadow:0 0 40px rgba(0,255,231,0.2);
+  position:absolute;
+  backface-visibility:hidden;
+  transition:transform 1s;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+}
+.card h2{color:#00ffe7;margin-bottom:20px;}
+.inputBox{width:80%;margin:10px 0;}
+.inputBox input{
+  width:100%;padding:10px 15px;
+  border:none;outline:none;
+  background:rgba(255,255,255,0.08);
+  color:#fff;border-radius:8px;
+}
+.btn{
+  margin-top:20px;padding:10px 25px;
+  background:#00ffe7;color:#000;
+  border:none;border-radius:8px;
+  font-weight:600;cursor:pointer;
+  transition:0.3s;
+}
+.btn:hover{background:#00c3a3;box-shadow:0 0 20px #00ffe7;}
+.toggle{
+  margin-top:15px;color:#b8c6d1;cursor:pointer;
+  font-size:0.9em;text-decoration:underline;
+}
+#signup-card{transform:rotateY(180deg);}
+.wrapper.flip #login-card{transform:rotateY(180deg);}
+.wrapper.flip #signup-card{transform:rotateY(0deg);}
+
+/* MAIN SITE STYLES */
+#mainSite{display:none;}
+* { margin:0; padding:0; box-sizing:border-box; font-family:"Poppins",sans-serif; }
+header { text-align:center; padding:90px 20px 60px; position:relative; z-index:1; }
+header h1 { font-size:3em; background:linear-gradient(90deg,#00ffe7,#b400ff,#00ffe7); background-size:200% auto; -webkit-background-clip:text; -webkit-text-fill-color:transparent; animation:textFlow 4s linear infinite; font-weight:700; text-shadow:0 0 20px rgba(0,255,231,0.4); }
+@keyframes textFlow { to{background-position:200% center;} }
+header p { font-size:1.1em; margin-top:12px; color:#b8c6d1; max-width:650px; margin-left:auto; margin-right:auto; line-height:1.6; }
+.btn { display:inline-block; margin-top:35px; padding:14px 36px; font-size:1rem; background:transparent; border:2px solid #00ffe7; color:#00ffe7; border-radius:8px; text-transform:uppercase; letter-spacing:1px; position:relative; overflow:hidden; transition:all 0.3s ease; cursor:pointer; z-index:2; }
+.btn:hover { color:#000; background:#00ffe7; box-shadow:0 0 20px #00ffe7,0 0 40px #00ffe7; }
+.section { background:rgba(255,255,255,0.03); border:1px solid rgba(0,255,231,0.15); padding:30px; border-radius:15px; margin:25px auto; max-width:1000px; }
+.section h2 { color:#00ffe7; border-left:4px solid #00ffe7; padding-left:10px; margin-bottom:15px; }
+.item { display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; padding:10px 0; border-bottom:1px solid #2a2a2a; }
+.item:last-child { border-bottom:none; }
+.item span { font-size:1em; color:#eee; }
+.item button { background-color:transparent; border:1px solid #33ff99; color:#33ff99; padding:6px 18px; border-radius:20px; cursor:pointer; font-size:0.9em; transition:all 0.3s ease; }
+.item button:hover { background-color:#33ff99; color:#000; transform:scale(1.05); }
+.subscribe { text-align:center; padding:80px 20px; background:linear-gradient(180deg,#020303,#071214); border-top:1px solid rgba(0,255,231,0.08); }
+.subscribe h2 { font-size:1.8em; color:#00ffe7; margin-bottom:10px; }
+.subscribe p { color:#b8c6d1; margin-bottom:25px; }
+.subscribe input { padding:12px 15px; width:260px; border-radius:6px; border:none; outline:none; background:rgba(255,255,255,0.05); color:#fff; font-size:1em; }
+.subscribe button { margin-left:10px; padding:12px 24px; background:#00ffe7; color:#000; border:none; border-radius:6px; font-weight:600; cursor:pointer; }
+.subscribe button:hover { background:#00c3a3; box-shadow:0 0 20px #00ffe7; }
+footer { background:#020202; text-align:center; padding:35px 15px; color:#b8c6d1; font-size:0.9em; border-top:1px solid rgba(0,255,231,0.08); }
+.socials a { color:#00ffe7; margin:0 10px; font-size:1.4em; transition:0.3s; }
+.socials a:hover { color:#b400ff; text-shadow:0 0 15px #b400ff; }
+.countdown { margin-top:20px; font-size:1.2em; color:#33ff99; font-weight:bold; }
+@media (max-width:600px) { header h1{font-size:2.2em;} .subscribe input{width:200px;margin-bottom:10px;} .subscribe button{margin-left:0;width:200px;} .item{flex-direction:column;align-items:flex-start;} .item button{margin-top:10px;width:100%;} }
+</style>
 </head>
 <body>
+
+<!-- LOGIN/SIGNUP -->
+<div class="wrapper" id="wrapper">
+  <div class="card" id="login-card">
+    <h2>Login</h2>
+    <div class="inputBox"><input type="email" id="loginEmail" placeholder="Email" required></div>
+    <div class="inputBox"><input type="password" id="loginPassword" placeholder="Password" required></div>
+    <button class="btn" onclick="login()">Login</button>
+    <div class="toggle" onclick="flipCard()">Don’t have an account? Sign Up</div>
+  </div>
+  <div class="card" id="signup-card">
+    <h2>Sign Up</h2>
+    <div class="inputBox"><input type="email" id="signupEmail" placeholder="Email" required></div>
+    <div class="inputBox"><input type="password" id="signupPassword" placeholder="Password" required></div>
+    <button class="btn" onclick="signup()">Sign Up</button>
+    <div class="toggle" onclick="flipCard()">Already have an account? Login</div>
+  </div>
+</div>
+
+<!-- MAIN SITE -->
+<div id="mainSite">
+<header>
+  <h1>Hacker’s Hideout</h1>
+  <p>Get virtual tools, automation bots, premium services, and tutorials — all in one trusted platform.</p>
+  <div class="btn" onclick="window.location.href='https://wa.me/8801405706180'">Coming Soon</div>
+  <div class="countdown" id="countdown"></div>
+</header>
+
+<section class="section">
+  <h2>Virtual Numbers</h2>
+  <div class="item"><span>+1 555-0100</span><button onclick="window.location.href='https://wa.me/8801405706180'">Buy</button></div>
+  <div class="item"><span>+880 1714-562480</span><button onclick="window.location.href='https://wa.me/8801405706180'">Buy</button></div>
+  <div class="item"><span>+234 905 123 4567</span><button onclick="window.location.href='https://wa.me/8801405706180'">Buy</button></div>
+</section>
+
+<section class="section">
+  <h2>Premium Apps</h2>
+  <div class="item"><span>ChatMaster Pro</span><button onclick="window.location.href='https://wa.me/8801405706180'">Buy</button></div>
+  <div class="item"><span>SecureVault</span><button onclick="window.location.href='https://wa.me/8801405706180'">Buy</button></div>
+  <div class="item"><span>StreamPlus</span><button onclick="window.location.href='https://wa.me/8801405706180'">Buy</button></div>
+</section>
+
+<section class="section">
+  <h2>Toolkits</h2>
+  <div class="item"><span>Hacker’s Hideout</span><button onclick="window.location.href='https://wa.me/8801405706180'">Buy</button></div>
+  <div class="item"><span>ScriptVault</span><button onclick="window.location.href='https://wa.me/8801405706180'">Buy</button></div>
+  <div class="item"><span>BotForge</span><button onclick="window.location.href='https://wa.me/8801405706180'">Buy</button></div>
+</section>
+
+<section class="subscribe">
+  <h2>Stay Updated</h2>
+  <p>Subscribe to get early access and updates from Hacker’s Hideout.</p>
+  <form onsubmit="window.location.href='https://wa.me/8801405706180'; return false;">
+    <input type="email" placeholder="Enter your email" required />
+    <button type="submit">Subscribe</button>
+  </form>
+</section>
+
+<footer>
+  <div class="socials">
+    <a href="#"><i class='bx bxl-twitter'></i></a>
+    <a href="#"><i class='bx bxl-facebook'></i></a>
+    <a href="#"><i class='bx bxl-instagram'></i></a>
+    <a href="#"><i class='bx bxl-github'></i></a>
+  </div>
+  <p>© <span id="year"></span> Hacker’s Hideout — All rights reserved.</p>
+  <p>Contact: info@hackershideout.tech</p>
+</footer>
+</div>
+
 <script>
-(function(){
-    var encoded = "CjwhRE9DVFlQRSBodG1sPgo8aHRtbCBsYW5nPSJlbiI+CjxoZWFkPgo8bWV0YSBjaGFyc2V0PSJVVEYtOCIgLz4KPG1ldGEgbmFtZT0idmlld3BvcnQiIGNvbnRlbnQ9IndpZHRoPWRldmljZS13aWR0aCwgaW5pdGlhbC1zY2FsZT0xLjAiLz4KPHRpdGxlPkhhY2tlcuKAmXMgSGlkZW91dCDigJQgWW91ciBVbHRpbWF0ZSBUZWNoIFJlc291cmNlIEh1YjwvdGl0bGU+CjxsaW5rIGhyZWY9Imh0dHBzOi8vdW5wa2cuY29tL2JveGljb25zQDIuMS40L2Nzcy9ib3hpY29ucy5taW4uY3NzIiByZWw9InN0eWxlc2hlZXQiPgo8c3R5bGU+CmJvZHkgeyBiYWNrZ3JvdW5kOnJhZGlhbC1ncmFkaWVudChjaXJjbGUgYXQgMjAlIDMwJSwgIzA2MTYxYiwgIzAxMDEwMSA3MCUpOyBjb2xvcjojZTlmMWZmOyBvdmVyZmxvdy14OmhpZGRlbjsgcG9zaXRpb246cmVsYXRpdmU7IH0KaDEgeyBjb2xvcjojMDBmZmU3OyB9Cjwvc3R5bGU+CjwvaGVhZD4KPGJvZHk+CjxoZWFkZXI+CjxoMT5IYWNrZXLigJlzIEhpZGVvdXQ8L2gxPgo8cD5HZXQgdmlydHVhbCB0b29scywgYXV0b21hdGlvbiBib3RzLCBwcmVtaXVtIHNlcnZpY2VzLCBhbmQgdHV0b3JpYWxzIOKAlCBhbGwgaW4gb25lIHRydXN0ZWQgcGxhdGZvcm0uPC9wPgo8L2hlYWRlcj4KPHNlY3Rpb24+CjxoMj5WaXJ0dWFsIE51bWJlcnM8L2gyPgo8cD4rMSA1NTUtMDEwMCwgKzg4MCAxNzE0LTU2MjQ4MCwgKzIzNCA5MDUgMTIzIDQ1Njc8L3A+Cjwvc2VjdGlvbj4KPGZvb3Rlcj4KPHA+wqkgSGFja2Vy4oCZcyBIaWRlb3V0IOKAlCBBbGwgcmlnaHRzIHJlc2VydmVkLjwvcD4KPC9mb290ZXI+CjwvYm9keT4KPC9odG1sPgo=";
-    document.write(atob(encoded));
-})();
+document.getElementById("year").textContent = new Date().getFullYear();
+
+// Countdown Timer
+let countdownDate = new Date();
+countdownDate.setDate(countdownDate.getDate() + 7);
+countdownDate = countdownDate.getTime();
+let countdownFunction = setInterval(function(){
+  let now = new Date().getTime();
+  let distance = countdownDate - now;
+  let days = Math.floor(distance / (1000*60*60*24));
+  let hours = Math.floor((distance % (1000*60*60*24))/(1000*60*60));
+  let minutes = Math.floor((distance % (1000*60*60))/(1000*60));
+  let seconds = Math.floor((distance % (1000*60))/1000);
+  document.getElementById("countdown").innerHTML = days+"d "+hours+"h "+minutes+"m "+seconds+"s";
+  if(distance < 0){
+    clearInterval(countdownFunction);
+    document.getElementById("countdown").innerHTML = "Launched!";
+  }
+}, 1000);
+
+// Flip card
+function flipCard(){
+  document.getElementById("wrapper").classList.toggle("flip");
+}
+
+// Signup function
+function signup(){
+  const email=document.getElementById("signupEmail").value;
+  const password=document.getElementById("signupPassword").value;
+  if(email && password){
+    localStorage.setItem("userEmail",email);
+    localStorage.setItem("userPassword",password);
+    alert("Signup successful! Please login now.");
+    flipCard();
+  }else{
+    alert("Please fill all fields.");
+  }
+}
+
+// Login function
+function login(){
+  const email=document.getElementById("loginEmail").value;
+  const password=document.getElementById("loginPassword").value;
+  const storedEmail=localStorage.getItem("userEmail");
+  const storedPassword=localStorage.getItem("userPassword");
+  if(email===storedEmail && password===storedPassword){
+    alert("Login successful!");
+    document.getElementById("wrapper").style.display="none";
+    document.getElementById("mainSite").style.display="block";
+  }else{
+    alert("Incorrect email or password!");
+  }
+}
 </script>
 </body>
-</html>
+                              </html>
